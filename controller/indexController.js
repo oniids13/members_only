@@ -1,9 +1,14 @@
-const pool = require('../config/pool')
+const {getAllMsg} = require('../Model/messageModel')
 
 
-const getIndex = (req, res) => {
-    res.render('index')
-}
+const getIndex = async (req, res) => {
+
+    const allMsg =  await getAllMsg();
+
+
+
+    res.render('index', {allMsg})
+};
 
 
 

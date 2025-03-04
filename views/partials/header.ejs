@@ -16,10 +16,24 @@
 
 
     <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-      <a href="/sign-up">
-        <button type="button" class="btn btn-primary">Sign-up</button>
-      </a>
+      <% if (!isLogged) { %>
+        <a href="/login">
+          <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        </a>
+        <a href="/sign-up">
+          <button type="button" class="btn btn-primary">Sign-up</button>
+        </a>
+      <% } else { %>
+        <% if(user.membership_status === 'non-member') { %>
+          <a href="/secret">
+            <button type="button" class="btn btn-warning">Be a Member!</button>
+          </a>
+        <% } %>
+        <a href="/logout">
+          <button type="button" class="btn btn-danger">Logout</button>
+        </a>
+      <% } %>
+      
     </div>
   </header>
 <body>
