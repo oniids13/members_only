@@ -22,7 +22,6 @@ const loginAuth = (req, res, next) => {
                 console.error('Login Error:', err);
                 return next(err);
             }
-            console.log('User logged in: ', user);
             return res.redirect('/login/success');
         });
     })(req,res, next);

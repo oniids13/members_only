@@ -37,6 +37,7 @@ exports.postForm = [validateUser, async (req, res) => {
 
     try {
         const { fullName, email, password } = req.body;
+        const admin = req.body.admin || false;
 
         const saltHash = genPassword(password);
         
@@ -45,8 +46,8 @@ exports.postForm = [validateUser, async (req, res) => {
         
         const member_status = 'non-member';
 
-        await pool.query('INSERT INTO users (fullname, email, salt, hash, membership_status) VALUES ($1, $2, $3, $4, $5)',
-            [fullName, email, salt, hash, member_status]
+        await pool.query('INSERT INTO users (fullname, email, salt, hash, membership_status, is_admin) VALUES ($1, $2, $3, $4, $5, $6)',
+            [fullName, email, salt, hash, member_status, admin]
         )
         res.redirect('/')
     } catch (err) {

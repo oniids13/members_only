@@ -1,4 +1,4 @@
-module.exports.isAuth = (req, res, next) => {
+const isAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next();
     } else {
@@ -7,10 +7,6 @@ module.exports.isAuth = (req, res, next) => {
 };
 
 
-module.exports.isMember = (req, res, next) => {
-    if (req.isAuthenticated() && (req.membership_status === 'member')) {
-        next();
-    } else {
-        res.status(401).json( {msg: 'You are not authorized.'})
-    }
-}
+
+
+module.exports = { isAuth };

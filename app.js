@@ -8,6 +8,7 @@ const indexRouter = require('./routes/indexRouter')
 const signUpRouter = require('./routes/signUpRouter');
 const loginRouter = require('./routes/loginRouter');
 const secretRouter = require('./routes/secretRouter');
+const messageRouter = require('./routes/messageRouter');
 
 require('./config/passport');
 
@@ -59,6 +60,7 @@ app.use('/', indexRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/secret', secretRouter);
+app.use('/message', messageRouter);
 
 // Logging out
 app.get('/logout', (req, res) => {
