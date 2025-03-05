@@ -2,35 +2,35 @@
 
  <main class="container">
    <% if(!user) { %>
-      <h1>Hello anonymous!</h1>
+      <h1 class="p-2">Hello anonymous!</h1>
    <%} else { %>
-      <h1>Hello <%= user.fullname %>!</h1>
-      <a href="/message"><button class="btn btn-primary">Create Message</button></a>
+      <h1 class="p-2">Hello <%= user.fullname %>!</h1>
+      <a href="/message"><button class="btn btn-success">Create Message</button></a>
    <% } %>
 
    <% if (!isLogged) { %>
-      Log-in or Sign-up to view the content
+      <p class="p-3" id="hidden-content">Log-in or Sign-up to view the content</p>
    <% } else { %>
-      <% allMsg.forEach(msg => { %>
-         <div>
-            <h3><%= msg.title %></h3>
-            <% if (user.membership_status === 'member' || user.is_admin) { %>
-               <p>Author: <%= msg.fullname %></p>
-               <small>Created at: <%= msg.created_at %></small>
-            <% } %>  
-            <p><%= msg.body %></p>
-            <% if (user.is_admin) { %>
-               
-               <a href="/message/<%= msg.id %>"><button class="btn btn-danger">Delete</button></a>
-            <% } %>
-         </div>
-      <% }) %>
+      <div class="msg-container">
+         <% allMsg.forEach(msg => { %>
+            <div class="card p-4 my-3" style="width: 18rem;">
+               <h5 class="card-title"><%= msg.title %></h5>
+               <% if (user.membership_status === 'member' || user.is_admin) { %>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">By: <%= msg.fullname %></h6>
+                  <small class="card-text">Posted at: <%= new Date(msg.created_at).toLocaleDateString() %></small>
+               <% } %>
+               <p class="card-text mt-3"><%= msg.body %></p>
+               <% if (user.is_admin) { %>
+                  <a href="/message/<%= msg.id %>" class="card-link"><button class="btn btn-danger btn-sm">Delete</button></a>
+               <% } %>
+            </div>
+         <% }) %>
+      </div>
 
    <% } %>
       
     
  </main>
-
 
 
  <%- include('partials/footer') %>

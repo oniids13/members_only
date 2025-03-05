@@ -2,7 +2,7 @@ const passport = require('passport');
 
 
 const getLogin = (req, res) => {
-    res.render('login.ejs');
+    res.render('login.ejs', {error: null});
 }
 
 const loginAuth = (req, res, next) => {
@@ -15,7 +15,7 @@ const loginAuth = (req, res, next) => {
         }
         if (!user) {
             console.log('Authentication Failed');
-            return res.redirect('/login/failure');
+            return res.render('login', {error: 'Incorrect Email/Password. Please Try again.'});
         }
         req.logIn(user, (err) => {
             if (err) {
@@ -27,13 +27,10 @@ const loginAuth = (req, res, next) => {
     })(req,res, next);
 };
 
-const loginFail = (req, res) => {
-    res.send('You entered the wrong password');
-}
 
 const loginSuccess = (req, res) => {
     res.redirect('/');
 }
 
 
-module.exports = { getLogin, loginAuth, loginFail, loginSuccess }
+module.exports = { getLogin, loginAuth, loginSuccess }

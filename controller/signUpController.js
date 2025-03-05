@@ -23,7 +23,7 @@ const validateUser = [
 
 
 exports.getForm = (req, res) => {
-    res.render('signupForm')
+    res.render('signupForm', {error: null})
 }
 
 
@@ -31,8 +31,10 @@ exports.postForm = [validateUser, async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log("Validation Errors: ", errors.array());
-        return res.status(400).json({errors: errors.array()});
+        const errorsArray = errors.array();
+       
+
+        return res.render('signupForm', {error: errorsArray});
     }
 
     try {
@@ -49,10 +51,13 @@ exports.postForm = [validateUser, async (req, res) => {
         await pool.query('INSERT INTO users (fullname, email, salt, hash, membership_status, is_admin) VALUES ($1, $2, $3, $4, $5, $6)',
             [fullName, email, salt, hash, member_status, admin]
         )
-        res.redirect('/')
+        return res.redirect('/login')
     } catch (err) {
         console.error("Database Error: ", err);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).render('signupForm', {
+            error: ['An error occurred while processing your request. Please try again.'],
+            formData: req.body
+        });
     }
 
 }];

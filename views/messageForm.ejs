@@ -1,18 +1,21 @@
 <%- include('partials/header') %>
 
-<main class="container">
-    <form action="/message" method="POST">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="title" required>
-            <label for="floatingInput">Title</label>
-          </div>
-          <div class="mb-3">
-            <label for="text">Message</label>
-            <br />
-           <textarea class="p-3" name="body" id="text" rows="10" cols="150" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+<main class="container form-container">
+    <div class="form">
+      <form action="/message" method="POST">
+        <h2>New Message</h2>
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="title" required>
+              <label for="floatingInput">Title</label>
+            </div>
+            <div class="mb-3">
+              <label for="text">Message</label>
+              <br />
+             <textarea class="p-3" name="body" id="text" rows="10" cols="150" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
 </main>
 
 

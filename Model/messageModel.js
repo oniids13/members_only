@@ -15,4 +15,4 @@ const getAllMsg = async () => {
 
 
 
-module.exports = { getAllMsg};
+module.exports = { getAllMsg };
